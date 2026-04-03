@@ -8,8 +8,14 @@ public final class CompatUtil {
     private static final long SUB_VERSION;
 
     static {
-        final String packageName = Bukkit.getServer().getBukkitVersion().split("\\.")[1];
-        SUB_VERSION = NumberUtil.parseLong(packageName).orElse(0);
+        final String[] parts = Bukkit.getServer().getBukkitVersion().split("\\.");
+        final long major = NumberUtil.parseLong(parts[0].split("[^0-9]")[0]).orElse(1);
+        if (major > 1) {
+            // Server versions 2+ (e.g. 26.1.1) are always modern
+            SUB_VERSION = 99;
+        } else {
+            SUB_VERSION = NumberUtil.parseLong(parts[1].split("[^0-9]")[0]).orElse(0);
+        }
     }
 
     private CompatUtil() {}

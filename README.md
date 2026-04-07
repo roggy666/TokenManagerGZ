@@ -1,10 +1,25 @@
-<h1>TokenManager</h1> 
+# TokenManager (GlitchZone Fork)
 
-[![](https://jitpack.io/v/Realizedd/TokenManager.svg)](https://jitpack.io/#Realizedd/TokenManager)
+Fork of [TokenManager](https://github.com/Realizedd/TokenManager) with fixes for modern Minecraft server versions (26.x+).
 
-A simple economy plugin for spigot. <a href="https://www.spigotmc.org/resources/tokenmanager.8610/">Spigot Project Page</a>
+Based on [shafiahaz2478/TokenManager](https://github.com/shafiahaz2478/TokenManager) (1.20.6 branch).
 
----
+## Changes from upstream
+
+- **Fix version parsing for 26.x+** — original plugin failed to parse server versions with major version 26 and above
+- **Remove shaded SLF4J** — Paper already provides SLF4J; shading and relocating `slf4j-nop` broke `ServiceLoader` discovery, causing `"No SLF4J providers were found"` warnings on every startup
+
+## Building
+
+```bash
+./gradlew clean build
+```
+
+Output jar: `out/TokenManager-3.2.8-all.jar`
+
+## Original README
+
+A simple economy plugin for Spigot. [Spigot Project Page](https://www.spigotmc.org/resources/tokenmanager.8610/)
 
 * **[Wiki](https://github.com/Realizedd/TokenManager/wiki)**
 * **[Commands](https://github.com/Realizedd/TokenManager/wiki/commands)**
@@ -14,60 +29,11 @@ A simple economy plugin for spigot. <a href="https://www.spigotmc.org/resources/
 * **[shops.yml](https://github.com/Realizedd/TokenManager/blob/master/src/main/resources/shops.yml)**
 * **[Support Discord](https://discord.gg/RNy45sg)**
 
-
-### Getting the dependency
-
-#### Repository
-Gradle:
-```groovy
-maven {
-    name 'jitpack-repo'
-    url 'https://jitpack.io'
-}
-```
-
-Maven:
-```xml
-<repository>
-  <id>jitpack-repo</id>
-  <url>https://jitpack.io</url>
-</repository>
-```
-
-#### Dependency
-Gradle:
-```groovy
-compile (group: 'com.github.Realizedd', name: 'TokenManager', version: '3.2.4') {
-    transitive = false
-}
-```  
-
-Maven:
-```xml
-<dependency>
-    <groupId>com.github.Realizedd</groupId>
-    <artifactId>TokenManager</artifactId>
-    <version>3.2.4</version>
-    <exclusions>
-        <exclusion>
-            <groupId>*</groupId>
-            <artifactId>*</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-```
-
-### plugin.yml
-Add TokenManager as a soft-depend to ensure TokenManager is fully loaded before your plugin.
-```yaml
-soft-depend: [TokenManager]
-```
-
 ### Getting the API instance
 
 ```java
 @Override
 public void onEnable() {
-  TokenManager api = (TokenManager) Bukkit.getServer().getPluginManager().getPlugin("TokenManager");
+    TokenManager api = (TokenManager) Bukkit.getServer().getPluginManager().getPlugin("TokenManager");
 }
 ```

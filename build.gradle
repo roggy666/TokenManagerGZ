@@ -86,7 +86,7 @@ dependencies {
     implementation 'redis.clients:jedis:5.1.2'
     implementation 'org.apache.commons:commons-pool2:2.12.0'
     implementation 'com.zaxxer:HikariCP:4.0.3'
-    implementation 'org.slf4j:slf4j-nop:2.0.13'
+    compileOnly 'org.slf4j:slf4j-api:2.0.13'
     implementation 'org.bstats:bstats-bukkit:3.0.2'
 }
 
@@ -107,7 +107,7 @@ shadowJar {
         include(dependency('redis.clients:.*'))
         include(dependency('org.apache.commons:.*'))
         include(dependency('com.zaxxer:.*'))
-        include(dependency('org.slf4j:.*'))
+        //include(dependency('org.slf4j:.*'))
         include(dependency('org.bstats:.*'))
     }
 
@@ -116,7 +116,7 @@ shadowJar {
     relocate 'redis.clients', group + 'redis.clients'
     relocate 'org.apache.commons.pool2', group + 'apache.commons.pool2'
     relocate 'com.zaxxer.hikari', group + 'zaxxer.hikari'
-    relocate 'org.slf4j', group + "slf4j"
+    //relocate 'org.slf4j', group + "slf4j"
     relocate 'org.bstats', group + 'bstats'
 }
 
